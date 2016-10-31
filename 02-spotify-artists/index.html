@@ -9,11 +9,16 @@
     <div id="app-02">
       <div>
         <input type="text" v-model="name" value="">
-        <button v-on:click="search(name)">Search</button>
+        <button @click="search(name)">Search</button>
       </div>
       <ul>
         <li v-for="artist in artists">
-          {{ artist.name }}
+          <a :href="artist.uri">
+            <span>
+              <img v-if="artist.images.length > 0" :src="artist.images[0].url" width="100">
+            </span>
+            {{ artist.name }}
+          </a>
         </li>
       </ul>
     </div>
