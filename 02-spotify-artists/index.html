@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Spotify search for artists</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app-02">
+      <div>
+        <input type="text" v-model="name" value="">
+        <button v-on:click="search(name)">Search</button>
+      </div>
+      <ul>
+        <li v-for="artist in artists">
+          {{ artist.name }}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      function searchByArtistName(name) {
+        return fetch('https://api.spotify.com/v1/search?q=' + name + '&type=artist&limit=10').then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          app.artists = res.artists.items;
+        });
+      };
+      var app = new Vue({
+        el: '#app-02',
+        data: {
+          artists: []
+        },
+        methods: {
+          search(name) {
+            searchByArtistName(name);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
