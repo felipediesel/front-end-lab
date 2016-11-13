@@ -103,5 +103,3 @@ class AudioGraphic {
     });
   }
 }
-
-const audioGraphic = new AudioGraphic('audio-epic.mp3');
